@@ -1,14 +1,12 @@
 import express from 'express';
-import Employee from './database/models/employee';
+// import Employee from './database/models/employee';
+import routes from './Routes/Routes';
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/', async (_req, res) => {
-  const result = await Employee.findAll();
-  res.status(200).json(result);
-})
+app.use('/', routes);
 
 
 export default app;

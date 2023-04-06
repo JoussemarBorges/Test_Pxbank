@@ -5,10 +5,12 @@ import IEmployee from "../Interfaces/IEmployee";
 class EmployeeService {
 model: ModelStatic<Employee> = Employee;
 
-  static async registerEmployee(newEmployeeData: IEmployee): Promise<IEmployee> {
-    const newRegister = await Employee.create({...newEmployeeData})
+  static async registerEmployee(newEmployeeData: IEmployee): Promise<IEmployee[] | null> {
+    // const newRegister = await Employee.create({...newEmployeeData});
 
-    return newRegister.dataValues;
+    const newRegister = await Employee.findAll();
+
+    return newRegister;
   }
 }
 

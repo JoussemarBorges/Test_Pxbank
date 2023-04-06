@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-// import { ModelStatic } from "sequelize";
 import EmployeeService from "../Services/EmployeeService";
 
 class EmployeeController {
