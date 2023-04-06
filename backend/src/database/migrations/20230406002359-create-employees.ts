@@ -28,11 +28,11 @@ module.exports = {
       type: DATE,
       allowNull: false,
     },
-    departament_id: {
+    department_id: {
       type: INTEGER,
       allowNull: false,
       references: {
-        model: 'departaments',
+        model: 'departments',
         key: 'id'
       }
     },    

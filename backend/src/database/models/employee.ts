@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.'
-import Departament from './departament';
+import Department from './department';
 
 
   class Employee extends Model {}
@@ -14,15 +14,16 @@ import Departament from './departament';
     employeeName: DataTypes.STRING,
     cpf: DataTypes.STRING,
     wage: DataTypes.DECIMAL(4,2),
-    date_of_birth: DataTypes.DATE,
-    departament_id: DataTypes.INTEGER,
+    dateOfBirth: DataTypes.DATE,
+    departmentId: DataTypes.INTEGER,
   }, {
     sequelize: db,
     modelName: 'Employee',
     underscored: true,
+    timestamps: false
   });
 
-  Employee.belongsTo(Departament, {foreignKey: 'departamentId', as: 'departament' })
-  Departament.hasMany(Employee, {foreignKey: 'departamentId', as: 'employees' })
+  Employee.belongsTo(Department, {foreignKey: 'departmentId', as: 'department' })
+  Department.hasMany(Employee, {foreignKey: 'departmentId', as: 'employees' })
 
   export default Employee;

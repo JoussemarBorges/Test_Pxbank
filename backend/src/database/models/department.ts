@@ -1,23 +1,26 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.'
 
-  class Departament extends Model {}
-  Departament.init({
+
+  class Department extends Model {}
+  Department.init({
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
-    departamentName: {
+    departmentName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     
   }, {
     sequelize: db,
-    modelName: 'Departament',
-    underscored: true
+    modelName: 'Department',
+    underscored: true,
+    timestamps: false,
   });
+  
 
-  export default Departament;
+  export default Department;

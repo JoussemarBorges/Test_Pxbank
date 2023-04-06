@@ -5,14 +5,14 @@ import { QueryInterface, Sequelize, INTEGER, STRING } from "sequelize";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface: QueryInterface, _Sequelize: Sequelize) {
-    await queryInterface.createTable('departaments', { 
+    await queryInterface.createTable('departments', { 
       id: {
         type: INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true,
       },
-      departament_name: {
+      department_name: {
         type: STRING,
         allowNull: false,
       }
@@ -20,6 +20,6 @@ module.exports = {
   },
 
   async down (queryInterface: QueryInterface, _Sequelize: Sequelize) {
-    await queryInterface.dropTable('departaments');
+    await queryInterface.dropTable('departments');
   }
 };

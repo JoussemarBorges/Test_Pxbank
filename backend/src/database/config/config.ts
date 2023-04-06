@@ -1,5 +1,5 @@
-
-const jsonConfig = {
+import {Options} from 'sequelize'
+const jsonConfig: Options = {
     username: "root",
     password: 'rootPassword',
     database: "pxbank",
@@ -10,10 +10,9 @@ const jsonConfig = {
     },
     port: 3003
   };
-
-export default {
-  production: jsonConfig,
-  development: jsonConfig,
-  test: jsonConfig,
-}
-
+  
+  export = {
+    production: jsonConfig,
+    development: jsonConfig,
+  }
+  
