@@ -7,4 +7,6 @@ employeesRoutes.post('/', (req, res) => EmployeeController.registerEmployee(req,
 
 employeesRoutes.get('/', (req, res) => EmployeeController.getAllEmployees(req, res));
 
+employeesRoutes.put('/', (req, res) => EmployeeController.updateEmployee(req, res));
+
 export default employeesRoutes;

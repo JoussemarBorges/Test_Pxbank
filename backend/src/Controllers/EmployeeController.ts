@@ -11,10 +11,18 @@ class EmployeeController {
     return res.status(201).json(newEmployee);
   }
 
-  static async getAllEmployees(req: Request, res: Response) {
+  static async getAllEmployees(_req: Request, res: Response) {
     const allEmployees = await EmployeeService.getAllEmployees();
 
     return res.status(200).json(allEmployees);
+  }
+
+  static async updateEmployee(req: Request, res: Response) {
+    const employeeData = req.body;
+    
+    const result = await EmployeeService.updateEmployee(employeeData);
+
+    return res.status(200).json(result);
   }
 }
 

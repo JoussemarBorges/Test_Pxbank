@@ -12,10 +12,16 @@ class EmployeeService {
     return employeeRegistered
   }
 
-  static async getAllEmployees() {
-    const allEmployees = await Employee.findAll();
+  static async getAllEmployees(): Promise<IEmployee[]> {
+    const allEmployees: IEmployee[] = await Employee.findAll({raw: true}) as unknown as IEmployee[];
 
     return allEmployees;
+  }
+
+  static async updateEmployee(employeeData: IEmployee) {
+    const result = await Employee.update({...employeeData}, {where: {id: employeeData.id}});
+
+    return result;
   }
 }
 
