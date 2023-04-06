@@ -11,7 +11,7 @@ const jsonConfig = {
     port: 3003
   };
 
-export default {
+module.exports = {
   production: jsonConfig,
   development: jsonConfig,
   test: jsonConfig,
