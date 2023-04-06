@@ -21,7 +21,7 @@ module.exports = {
       allowNull: false,
     },
     wage: {
-      type: DECIMAL(4,2),
+      type: DECIMAL(6,2),
       allowNull: false,
     },
     date_of_birth: {

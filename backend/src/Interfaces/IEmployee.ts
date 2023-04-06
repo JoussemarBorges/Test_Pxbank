@@ -4,7 +4,7 @@ interface IEmployee {
   cpf: string,
   wage: number,
   dateOfBirth: Date,
-  departamentId?: number,
+  departmentId?: number,
 }
 
 export default IEmployee;
