@@ -6,9 +6,10 @@ class EmployeeController {
   static async registerEmployee(req: Request, res: Response) {
     const newEmployeeData = req.body;
     
-    const newEmployee = await EmployeeService.registerEmployee(newEmployeeData);
+    const employeeWasregistered = await EmployeeService.registerEmployee(newEmployeeData);
 
-    return res.status(201).json(newEmployee);
+    if(!employeeWasregistered) return res.status(400).json({message: 'O id do departamento não é válido'})
+    return res.status(201).json(employeeWasregistered);
   }
 
   static async getAllEmployees(_req: Request, res: Response) {
@@ -30,7 +31,9 @@ class EmployeeController {
 
     const isEmployeeDeleted = await EmployeeService.deleteEmployeeByID(+id);
 
-    return res.status(200).json(isEmployeeDeleted);
+    if(isEmployeeDeleted === 1) return res.status(200).json({message: 'Funcionário deletado com sucesso!'});
+
+    return res.status(404).json({message: 'Id não encontrado'})
   }
 }
 
