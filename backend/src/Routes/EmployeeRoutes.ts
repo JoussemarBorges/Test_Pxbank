@@ -3,12 +3,12 @@ import EmployeeController from "../Controllers/EmployeeController";
 
 const employeesRoutes = Router();
 
-employeesRoutes.post('/', (req, res) => EmployeeController.registerEmployee(req, res));
+employeesRoutes.post('/', (req, res, next) => EmployeeController.registerEmployee(req, res, next));
 
-employeesRoutes.get('/', (req, res) => EmployeeController.getAllEmployees(req, res));
+employeesRoutes.get('/', (req, res, next) => EmployeeController.getAllEmployees(req, res, next));
 
-employeesRoutes.put('/', (req, res) => EmployeeController.updateEmployee(req, res));
+employeesRoutes.put('/', (req, res, next) => EmployeeController.updateEmployee(req, res, next));
 
-employeesRoutes.delete('/:id', (req, res) => EmployeeController.deleteEmployeeByID(req, res));
+employeesRoutes.delete('/:id', (req, res, next) => EmployeeController.deleteEmployeeByID(req, res, next));
 
 export default employeesRoutes;
