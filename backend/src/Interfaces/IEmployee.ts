@@ -2,9 +2,8 @@ interface IEmployee {
   id?: number,
   employeeName: string,
   cpf: string,
-  departament: string,
   wage: number,
-  birthDate: Date,
+  dateOfBirth: Date,
   departamentId?: number,
 }
 
