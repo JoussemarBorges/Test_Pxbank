@@ -14,7 +14,6 @@ class DepartmentService {
 
   static async getAllDepartments() {
     const departments = await Department.findAll();
-    console.log(departments);
     
     return departments;
   }

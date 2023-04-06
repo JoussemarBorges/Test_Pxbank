@@ -10,6 +10,12 @@ class EmployeeController {
 
     return res.status(201).json(newEmployee);
   }
+
+  static async getAllEmployees(req: Request, res: Response) {
+    const allEmployees = await EmployeeService.getAllEmployees();
+
+    return res.status(200).json(allEmployees);
+  }
 }
 
 export default EmployeeController;

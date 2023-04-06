@@ -11,6 +11,12 @@ class EmployeeService {
 
     return employeeRegistered
   }
+
+  static async getAllEmployees() {
+    const allEmployees = await Employee.findAll();
+
+    return allEmployees;
+  }
 }
 
 export default EmployeeService;
