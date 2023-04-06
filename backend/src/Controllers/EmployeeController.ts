@@ -21,9 +21,11 @@ class EmployeeController {
   static async updateEmployee(req: Request, res: Response) {
     const employeeData = req.body;
     
-    const result = await EmployeeService.updateEmployee(employeeData);
+    const isEmployeeUpdated = await EmployeeService.updateEmployee(employeeData);
 
-    return res.status(200).json(result);
+    if(isEmployeeUpdated !== 1) return res.status(404).json(isEmployeeUpdated)
+
+    return res.status(200).json({message: 'Dados atualizados com sucesso!' });
   }
 
   static async deleteEmployeeByID(req: Request, res: Response) {
