@@ -23,6 +23,15 @@ class EmployeeService {
 
     return result;
   }
+
+  static async deleteEmployeeByID(id: number) {
+    const result = await Employee.destroy({where: {id}});
+
+    console.log(result);
+    
+
+    return result;
+  }
 }
 
 export default EmployeeService;

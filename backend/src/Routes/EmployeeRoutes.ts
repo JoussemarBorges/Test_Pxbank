@@ -9,4 +9,6 @@ employeesRoutes.get('/', (req, res) => EmployeeController.getAllEmployees(req, r
 
 employeesRoutes.put('/', (req, res) => EmployeeController.updateEmployee(req, res));
 
+employeesRoutes.delete('/:id', (req, res) => EmployeeController.deleteEmployeeByID(req, res));
+
 export default employeesRoutes;

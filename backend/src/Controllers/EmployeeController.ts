@@ -24,6 +24,14 @@ class EmployeeController {
 
     return res.status(200).json(result);
   }
+
+  static async deleteEmployeeByID(req: Request, res: Response) {
+    const {id} = req.params;
+
+    const isEmployeeDeleted = await EmployeeService.deleteEmployeeByID(+id);
+
+    return res.status(200).json(isEmployeeDeleted);
+  }
 }
 
 export default EmployeeController;
