@@ -1,19 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../context/Context";
 
 
 function SearchForm() {
-  const {departments} = useContext(AppContext)
-  const [filterDepartment, setFilterDepartm] = useState(0);
+  const {departments, setFilterDepartment} = useContext(AppContext)
+  
   const [employeeName, setEmployeeName] = useState('');
 
   
   const handledepartamentList = ({target: {value}}) => {
-    setFilterDepartm(value)
+    setFilterDepartment(value)
   }
 
   const handleEmployeeSsearch = ({target: {value}}) => {
     setEmployeeName(value);
+    console.log(employeeName)
   }
   
   return (
@@ -23,7 +24,7 @@ function SearchForm() {
             Nome:
           <input 
             name="Nome"
-            type={Text}
+            type="text"
             onChange={handleEmployeeSsearch}     
           />
         </label>

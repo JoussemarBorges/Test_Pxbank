@@ -6,12 +6,14 @@ import AppContext from './Context';
 export default function EmployeeProvider({ children }) {
   const [employees, setEmployees] = useState([]);
   const [departments, setDepartments] = useState([]);
+  const [filterDepartment, setFilterDepartment] = useState(0);
 
 
   const getEmployees = async () => {
     const api = axios.create({baseURL: 'http://localhost:3001'})
 
     const { data } = await api.get('/employees')
+
     setEmployees(data)
   }
 
@@ -33,9 +35,13 @@ export default function EmployeeProvider({ children }) {
     employees,
     setEmployees,
     departments,
+    filterDepartment,
+    setFilterDepartment
   }), [
     employees,
-    departments
+    departments,
+    filterDepartment,
+    setFilterDepartment
   ]);
 
   return (

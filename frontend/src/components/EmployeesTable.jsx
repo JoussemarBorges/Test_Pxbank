@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import AppContext from "../context/Context";
 
 
 function EmployeeTable () {
-const {employees, setEmployees} = useContext(AppContext);
-const [dataTable, setDataTable] = useState([]);
-
-useEffect(() => {
-  setDataTable(employees);
-}, [])
+const {employees} = useContext(AppContext);
+// const [dataTable, setDataTable] = useState([]);
 
 return (
   <>
@@ -36,11 +32,10 @@ return (
             <button type="Button" value={employee}>Excluir</button>
           </td>
         </tr>
-      )).sort()
+      ))
     }
     </tbody>
   </table>
-  <button type="Button">Novo Funcionário</button>
   </>
 )
 }
