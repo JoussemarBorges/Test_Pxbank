@@ -20,7 +20,11 @@ class EmployeeService {
   }
 
   static async getAllEmployees(){
-    const allEmployees = await Employee.findAll();
+    const allEmployees = await Employee.findAll({
+      include: [
+        {model: Department, as: 'department'}
+      ]
+    });
 
     return allEmployees;
   }
