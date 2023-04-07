@@ -1,27 +1,23 @@
-import axios from 'axios';
 import PropTypes from 'prop-types';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import AppContext from './Context';
+import axiosApi from '../Utils/utils';
 
 export default function EmployeeProvider({ children }) {
   const [employees, setEmployees] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [filterDepartment, setFilterDepartment] = useState(0);
+  
 
+  const editEmployee = useRef({})
 
   const getEmployees = async () => {
-    const api = axios.create({baseURL: 'http://localhost:3001'})
-
-    const { data } = await api.get('/employees')
-
+    const { data } = await axiosApi.get('/employees')
     setEmployees(data)
   }
 
   const getDepartments = async () => {
-    const api = axios.create({baseURL: 'http://localhost:3001'})
-    
-    const { data } = await api.get('/departments');
-    
+    const { data } = await axiosApi.get('/departments');
     setDepartments(data)
   }
 
@@ -36,12 +32,16 @@ export default function EmployeeProvider({ children }) {
     setEmployees,
     departments,
     filterDepartment,
-    setFilterDepartment
+    setFilterDepartment,
+    editEmployee,
+   
   }), [
     employees,
+    setEmployees,
     departments,
     filterDepartment,
-    setFilterDepartment
+    setFilterDepartment,
+    editEmployee,
   ]);
 
   return (

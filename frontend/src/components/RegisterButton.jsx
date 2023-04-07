@@ -1,16 +1,18 @@
-import React from "react";
-// import AppContext from "../context/Context";
+import React,{ useContext } from "react";
 
 
-function RegisterButton () {
-  // const {departments, setFilterDepartment} = useContext(AppContext)
+function RegisterButton ({setToggleVisibRegister}) {
 
-  // const handleButton = () => {
+  const showEmployeeRegister = () => {
+    setToggleVisibRegister(true)
+  }
 
-  // }
   return (
     <div>
-      <button type="Button">
+      <button
+        type="Button"
+        onClick={showEmployeeRegister}
+      >
         Novo Funcionário
       </button>
     </div>

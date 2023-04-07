@@ -1,17 +1,10 @@
 import React from "react";
-import SearchForm from "../components/SearchForm";
 import Main from "../components/Main";
-import EmployeeTable from "../components/EmployeesTable";
-import RegisterButton from "../components/RegisterButton";
-import RegisterOrUpdateForm from "../components/RegisterOrUpdateForm";
-
+import SystemContainer from "../components/SystemContainer";
 export default function Employees() {
   return (
     <Main>
-      <SearchForm />
-      <EmployeeTable />
-      <RegisterButton />
-      <RegisterOrUpdateForm />
+      <SystemContainer />
     </Main>
   )
 }
