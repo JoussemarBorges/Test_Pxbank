@@ -36,7 +36,7 @@ class EmployeeController {
       const employeeData = req.body;
       const isEmployeeUpdated = await EmployeeService.updateEmployee(employeeData);
   
-      if(isEmployeeUpdated !== 1) return res.status(404).json(isEmployeeUpdated);
+      if(isEmployeeUpdated !== 1) return res.status(200).json(isEmployeeUpdated);
       return res.status(200).json({message: 'Dados atualizados com sucesso!' });
       
     } catch (error) {

@@ -32,13 +32,15 @@ class EmployeeService {
   static async updateEmployee(employeeData: IEmployee): Promise<number | object>{
     const {id, departmentId} = employeeData;
 
+
     const isValidId = await Employee.findByPk(id);    
     if(!isValidId) return {message: 'O id do funcionário informado é inválido'}
 
     const isDepatmentExists = await Department.findByPk(departmentId);
     if(!isDepatmentExists) return {message: 'O Id do departamento informado é inválido'}
 
-    const [affectedCount] = await Employee.update({...employeeData}, {where: {id: employeeData.id}});
+    const {id: _, ...employeeDt} = employeeData
+    const [affectedCount] = await Employee.update({...employeeDt}, {where: {id: employeeData.id}});
 
     if(affectedCount === 0) return {message: 'Nenhum dado foi atualizado'}
 
