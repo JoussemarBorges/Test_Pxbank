@@ -19,8 +19,8 @@ class EmployeeService {
     return employeeRegistered
   }
 
-  static async getAllEmployees(): Promise<IEmployee[] | null> {
-    const allEmployees: IEmployee[] = await Employee.findAll({raw: true}) as unknown as IEmployee[];
+  static async getAllEmployees(){
+    const allEmployees = await Employee.findAll();
 
     return allEmployees;
   }
