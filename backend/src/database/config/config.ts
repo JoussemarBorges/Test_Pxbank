@@ -1,14 +1,14 @@
 import {Options} from 'sequelize'
 const jsonConfig: Options = {
-    username: "root",
-    password: 'rootPassword',
-    database: "pxbank",
-    host: "127.0.0.1",
+    username: process.env.MYSQLUSER || "root",
+    password: process.env.MYSQLPASSWORD ||'rootPassword',
+    database: process.env.MYSQLDATABASE ||"pxbank",
+    host: process.env.MYSQLHOST || "127.0.0.1",
     dialect: "mysql",
     dialectOptions: {
       timezone: 'Z'
     },
-    port: 3003
+    port: Number(process.env.MYSQLPORT) || 3003
   };
   
   export = {
