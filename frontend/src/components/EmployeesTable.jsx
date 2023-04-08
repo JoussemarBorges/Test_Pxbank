@@ -38,11 +38,10 @@ return (
     {
       employees.length > 0 &&
       employees.map((employee) => (
-
         <tr key={employee.id}>
           <td>{employee.employeeName}</td>
           <td>{employee.department.departmentName}</td>
-          <td>{employee.wage}</td>
+          <td>{(+employee.wage).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</td>
           <td>{changeDate(employee.dateOfBirth)}</td>
           <td>
             <button

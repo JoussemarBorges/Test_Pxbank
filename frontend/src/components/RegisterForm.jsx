@@ -10,11 +10,10 @@ import { FaUserPlus } from "react-icons/fa";
 
 function RegisterForm ({setToggleVisibRegister}) {
   const {departments} = useContext(AppContext);
-
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
   const [department, setDepartment] = useState(1);
-  const [wage, setWage] = useState(0);
+  const [wage, setWage] = useState('');
   const [birthDate, setBirthDate] = useState(Date);
 
   const abortEmployeeRegister= () => {
@@ -25,7 +24,7 @@ function RegisterForm ({setToggleVisibRegister}) {
     const bodyRequest = {
       employeeName: name,
       cpf: cpf,
-      wage: +wage,
+      wage: +wage.replace('.', '').replace(',', '.'),
       dateOfBirth: birthDate,
       departmentId: department
     }

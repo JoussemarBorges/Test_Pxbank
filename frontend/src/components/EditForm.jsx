@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import AppContext from "../context/Context";
 import axiosApi from '../Utils/utils'
 import Masks from "../Utils/Masks";
@@ -9,7 +9,6 @@ import { FaUserEdit } from "react-icons/fa"
 
 function EditForm ({setToggleVisibEdit}) {
   const {departments, editEmployee} = useContext(AppContext);
-  const [cpf, setCpf] = useState('');
   
   const abortEmployeeEdit = () => {
     setToggleVisibEdit(false)
@@ -25,12 +24,9 @@ function EditForm ({setToggleVisibEdit}) {
   const updateEmployee = async () => {
     const {department: _, ...bodyRequest} = editEmployee.current
 
-    const wage = editEmployee.current.wage.replace(',', '.')
-    .replace(/\.\d{2}$/, '');
+    const wage = editEmployee.current.wage.replace('.', '').replace(',', '.')
 
-    console.log(wage)
-
-    return
+    bodyRequest.wage = wage;
 
     try {
       await axiosApi.put('/employees', bodyRequest);      
