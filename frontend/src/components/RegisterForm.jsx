@@ -28,7 +28,7 @@ function RegisterForm ({setToggleVisibRegister}) {
       dateOfBirth: birthDate,
       departmentId: department
     }
-    const {data} = await axiosApi.post('/employees', bodyRequest)
+    await axiosApi.post('/employees', bodyRequest)
 
     window.location.reload();
 
