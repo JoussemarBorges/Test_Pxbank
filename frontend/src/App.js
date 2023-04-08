@@ -1,5 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import Employees from './pages/Employees';
+import './style/app.css'
 
 function App() {
   return (

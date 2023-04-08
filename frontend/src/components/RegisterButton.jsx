@@ -1,10 +1,10 @@
-import React,{ useContext } from "react";
-
-
-function RegisterButton ({setToggleVisibRegister}) {
+import React from "react";
+import {BsPersonFillAdd} from 'react-icons/bs'
+function RegisterButton ({setToggleVisibRegister, setToggleVisibEdit}) {
 
   const showEmployeeRegister = () => {
     setToggleVisibRegister(true)
+    setToggleVisibEdit(false)
   }
 
   return (
@@ -13,7 +13,8 @@ function RegisterButton ({setToggleVisibRegister}) {
         type="Button"
         onClick={showEmployeeRegister}
       >
-        Novo Funcionário
+        <BsPersonFillAdd style={{marginRight:'5px', fontSize:'35px'}} />
+         Novo Funcionário
       </button>
     </div>
   )

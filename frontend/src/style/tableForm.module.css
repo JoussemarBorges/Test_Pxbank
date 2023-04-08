@@ -1,0 +1,27 @@
+.tableForm{
+  width: 1024px;
+  background-color: white;
+}
+
+.tableForm th {
+  background-color: #bbb;
+  color: white;
+  padding: 10px;
+}
+
+.tableForm td{
+  padding: 10px;
+  color: #333;
+  user-select: none;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.tableContainer {
+  width: 100%;
+  max-width: 1024px;
+  overflow: auto;
+  box-shadow: 1px 1px 10px #ccc;
+  margin: 20px 0;
+}

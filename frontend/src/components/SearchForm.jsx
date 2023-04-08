@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context/Context";
+import style from '../style/searchForm.module.css'
 
 
 function SearchForm() {
   const {
     departments,
-    // setFilterDepartment,
-    // employees,
-    // filterDepartment,
     setEmployees,
     employeesTable
   } = useContext(AppContext)
@@ -15,14 +13,6 @@ function SearchForm() {
   const [employeeName, setEmployeeName] = useState('');
   const [departmentId, setDepartmentId] = useState(0);
 
-  
-  // const handledepartamentList = ({target: {value}}) => {
-  //   setFilterDepartment(value)
-  // }
-
-  // const handleEmployeeSsearch = ({target: {value}}) => {
-  //   setEmployeeName(value);
-  // }
 
   const filterEmployees = () => {
     let dataFiltered;
@@ -49,11 +39,11 @@ function SearchForm() {
   }, [employeeName, departmentId])
   
   return (
-    <div>
-      <form>
+      <form className={style.searchForm}>
         <label>
             Nome:
           <input 
+            placeholder="Funcionário"
             name="Nome"
             type="text"
             onChange={({target:{value}}) => setEmployeeName(value)}
@@ -74,14 +64,7 @@ function SearchForm() {
             }
           </select>
         </label>
-        {/* <button
-          type="Button"
-          onClick={({target:{value}}) => filterEmployees(value)}
-        >
-          Pesquisar
-        </button> */}
       </form>
-    </div>
   )
 }
 

@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import AppContext from "../context/Context";
 import axiosApi from "../Utils/utils";
 import changeDate from "../Utils/dateMask";
+import style from '../style/tableForm.module.css'
+import {MdCancel} from 'react-icons/md'
+import {FaUserEdit} from 'react-icons/fa'
 
 
-function EmployeeTable ({setToggleVisibEdit}) {
+function EmployeeTable ({setToggleVisibEdit, setToggleVisibRegister}) {
 const {employees, setEmployees, editEmployee} = useContext(AppContext);
 
 const deleteEmployee = async ({target: {dataset: {employeeid}}}) =>{
@@ -17,11 +20,13 @@ const deleteEmployee = async ({target: {dataset: {employeeid}}}) =>{
 
 const showEmployeeEditForm = () => {
   setToggleVisibEdit(true)
+  setToggleVisibRegister(false)
+
 }
 
 return (
-  <>
-  <table>
+  <div className={style.tableContainer}>
+  <table className={style.tableForm}>
     <thead>
       <tr>
         <th>Nome</th>
@@ -47,14 +52,14 @@ return (
              data-employee={employee}
              onClick={() =>{editEmployee.current = employee; showEmployeeEditForm()}}
             >
-              Editar
+              <FaUserEdit />Editar
             </button>
             <button
              type="Button"
              data-employeeid={employee.id}
              onClick={deleteEmployee}
             >
-              Excluir
+              <MdCancel /> Excluir
             </button>
           </td>
         </tr>
@@ -62,7 +67,7 @@ return (
     }
     </tbody>
   </table>
-  </>
+  </div>
 )
 }
 
