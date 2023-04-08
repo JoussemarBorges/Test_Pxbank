@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
-    "start": "build/server.js",
+    "start": "node build/server.js",
     "reset": "npm run build && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "prestart": "tsc && npm install && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate"
 
