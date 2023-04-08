@@ -9,7 +9,7 @@
     "build": "tsc",
     "start": "node build/server.js",
     "reset": "npm run build && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
-    "prestart": "tsc && npm install && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate"
+    "prestart": "tsc && npm install && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
 
   },
   "keywords": [],
