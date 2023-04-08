@@ -8,12 +8,23 @@ export default function EmployeeProvider({ children }) {
   const [departments, setDepartments] = useState([]);
   const [filterDepartment, setFilterDepartment] = useState(0);
   
+  const [employeesTable, setEmployeesTable] = useState([]);
+  
 
   const editEmployee = useRef({})
 
   const getEmployees = async () => {
     const { data } = await axiosApi.get('/employees')
+
+    data.sort(function(a,b){
+      if(a.employeeName > b.employeeName) return 1
+      if(a.employeeName < b.employeeName) return -1
+
+      return 0;
+    })
     setEmployees(data)
+    setEmployeesTable(data)
+
   }
 
   const getDepartments = async () => {
@@ -34,7 +45,7 @@ export default function EmployeeProvider({ children }) {
     filterDepartment,
     setFilterDepartment,
     editEmployee,
-   
+    employeesTable, setEmployeesTable
   }), [
     employees,
     setEmployees,
@@ -42,6 +53,7 @@ export default function EmployeeProvider({ children }) {
     filterDepartment,
     setFilterDepartment,
     editEmployee,
+    employeesTable, setEmployeesTable 
   ]);
 
   return (
