@@ -13,7 +13,7 @@ import Department from './department';
     },
     employeeName: DataTypes.STRING,
     cpf: DataTypes.STRING,
-    wage: DataTypes.DECIMAL(6,2),
+    wage: DataTypes.DECIMAL(7,2),
     dateOfBirth: DataTypes.DATE,
     departmentId: DataTypes.INTEGER,
   }, {
