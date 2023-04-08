@@ -31,11 +31,11 @@ function SearchForm() {
     }
     setEmployees(dataFiltered)
 
-    console.log(departmentId)
   }
 
   useEffect(() => {
     filterEmployees()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [employeeName, departmentId])
   
   return (

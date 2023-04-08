@@ -1,11 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../context/Context";
 import axiosApi from '../Utils/utils'
+import Masks from "../Utils/Masks";
+import style from "../style/registerForm.module.css"
+import { MdAssignmentAdd, MdCancel } from "react-icons/md";
+import { FaUserEdit } from "react-icons/fa"
 
 
 function EditForm ({setToggleVisibEdit}) {
   const {departments, editEmployee} = useContext(AppContext);
-
+  const [cpf, setCpf] = useState('');
+  
   const abortEmployeeEdit = () => {
     setToggleVisibEdit(false)
   }
@@ -20,6 +25,13 @@ function EditForm ({setToggleVisibEdit}) {
   const updateEmployee = async () => {
     const {department: _, ...bodyRequest} = editEmployee.current
 
+    const wage = editEmployee.current.wage.replace(',', '.')
+    .replace(/\.\d{2}$/, '');
+
+    console.log(wage)
+
+    return
+
     try {
       await axiosApi.put('/employees', bodyRequest);      
     } catch (error) {
@@ -32,9 +44,12 @@ function EditForm ({setToggleVisibEdit}) {
   }
   
   return (
-  <>
-   <h4>Atualizar Funcionário</h4> 
-    <form>
+  <div className={style.modal}>
+    <form className={style.formregister}>
+      <h2>
+        <FaUserEdit style={{fontSize: "40px", marginRight: "10px"}}/>
+        Atualizar Funcionário
+      </h2> 
       <label>
         Nome:
         <input 
@@ -48,7 +63,12 @@ function EditForm ({setToggleVisibEdit}) {
         <input
          type="text"
          defaultValue={editEmployee.current.cpf}
-         onChange={({target: {value}}) => editEmployee.current.cpf = value}
+         onInput={({target}) => {
+          const {value, name} = target;
+          editEmployee.current.cpf = Masks[name](value);
+          target.value = Masks[name](value);
+        }}
+         name="cpf"
         />
       </label>
       <label>
@@ -71,8 +91,13 @@ function EditForm ({setToggleVisibEdit}) {
         Salário:
         <input
          type="text"
+         name="wage"
          defaultValue={editEmployee.current.wage}
-         onChange={({target: {value}}) => editEmployee.current.wage = +value} 
+         onChange={({target}) => {
+          const {name, value} = target;
+          editEmployee.current.wage = Masks[name](value);
+          target.value = editEmployee.current.wage = Masks[name](value);
+        }} 
         />
       </label>
       <label>
@@ -85,16 +110,16 @@ function EditForm ({setToggleVisibEdit}) {
         }/>
       </label>
       <button type="Button" onClick={updateEmployee}>
-        Atualizar
+        <MdAssignmentAdd style={{marginRight: "10px"}}/> Atualizar
       </button>
       <button
        type="Button"
        onClick={abortEmployeeEdit} 
       >
-        Cancelar
+        <MdCancel style={{marginRight: "10px"}}/> Cancelar
       </button>
     </form>
-  </>
+  </div>
   )
 }
 

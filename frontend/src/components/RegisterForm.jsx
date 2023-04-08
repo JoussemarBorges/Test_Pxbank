@@ -1,7 +1,11 @@
 import React, { useContext, useState } from "react";
 import AppContext from "../context/Context";
-import cpfMask from "../Utils/cpfMask";
+import Masks from "../Utils/Masks";
 import axiosApi from "../Utils/utils";
+import style from "../style/registerForm.module.css"
+import {MdAssignmentAdd} from 'react-icons/md'
+import {MdCancel} from 'react-icons/md'
+import { FaUserPlus } from "react-icons/fa";
 
 
 function RegisterForm ({setToggleVisibRegister}) {
@@ -21,7 +25,7 @@ function RegisterForm ({setToggleVisibRegister}) {
     const bodyRequest = {
       employeeName: name,
       cpf: cpf,
-      wage: wage,
+      wage: +wage,
       dateOfBirth: birthDate,
       departmentId: department
     }
@@ -33,17 +37,25 @@ function RegisterForm ({setToggleVisibRegister}) {
   }
   
   return (
-  <>
-
-  <h4>Novo Funcionário</h4>
-    <form id="registerForm">
+  <div className={style.modal}>
+    <form id="registerForm" className={style.formregister}>
+      <h2>
+        <FaUserPlus style={{fontSize: "40px", marginRight: "10px"}}/>
+        Novo Funcionário
+      
+      </h2> 
       <label>
         Nome:
         <input onChange={({target: {value}}) => setName(value)} type="text" />
       </label>
       <label>
         CPF:
-        <input onChange={({target: {value}}) => setCpf(cpfMask(value))} type="number" />
+        <input
+          onInput={({target: {value, name}}) => setCpf(Masks[name](value))}
+          type="text"
+          name="cpf"
+          value={cpf}
+        />
       </label>
       <label>
         Departamento:
@@ -60,23 +72,28 @@ function RegisterForm ({setToggleVisibRegister}) {
     </label>
       <label>
         Salário:
-        <input type="text" onChange={({target: {value}}) => setWage(+value)} />
+        <input
+          type="text"
+          onInput={({target: {value, name}}) => setWage(Masks[name](value))}
+          name="wage"
+          value={wage}
+        />
       </label>
       <label>
         Data de Nascimento:
         <input type="date" onChange={({target: {value}}) => setBirthDate(value)} />
       </label>
       <button type="Button" onClick={registerNewEmployee}>
-        Cadastrar
+        <MdAssignmentAdd style={{marginRight: "10px"}} /> Cadastrar
       </button>
       <button
        type="Button"
        onClick={abortEmployeeRegister}
       >
-        Cancelar
+        <MdCancel style={{marginRight: "10px"}}/> Cancelar
       </button>
     </form>
-  </>
+  </div>
   )
 }
 

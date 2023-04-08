@@ -1,0 +1,47 @@
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(85,85,85,.3);
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.formregister {
+  max-width: 480px;
+  width: 100%;
+  padding: 30px 15px;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 1.2em;
+}
+
+.formregister input, .formregister select {
+  width: 100%;
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+
+.formregister h2 {
+  padding: 25px 10px;
+  text-align: center;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.formregister label {
+  font-weight: 600;
+}
+
+.formregister .containerbuttons {
+  text-align: center;
+  width: 100%;
+}
+

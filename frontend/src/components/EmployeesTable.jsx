@@ -1,27 +1,25 @@
 import React, { useContext } from "react";
 import AppContext from "../context/Context";
-import axiosApi from "../Utils/utils";
 import changeDate from "../Utils/dateMask";
 import style from '../style/tableForm.module.css'
 import {MdCancel} from 'react-icons/md'
 import {FaUserEdit} from 'react-icons/fa'
 
 
-function EmployeeTable ({setToggleVisibEdit, setToggleVisibRegister}) {
-const {employees, setEmployees, editEmployee} = useContext(AppContext);
+function EmployeeTable ({setToggleVisibEdit, setToggleVisibRegister, setToggleVisibAlert}) {
+const {employees, setEmployeeIdToExclude, editEmployee} = useContext(AppContext);
 
-const deleteEmployee = async ({target: {dataset: {employeeid}}}) =>{
-  await axiosApi.delete(`/employees/${employeeid}`)
-
-  const updatedEmployees = employees.filter((employee) => +employee.id !== +employeeid )
-
-  setEmployees(updatedEmployees)
+const showDeleteAlert = () => {
+  setToggleVisibAlert(true)
+  setToggleVisibEdit(false)
+  setToggleVisibRegister(false)
 }
 
 const showEmployeeEditForm = () => {
   setToggleVisibEdit(true)
   setToggleVisibRegister(false)
-
+  setToggleVisibAlert(false)
+  
 }
 
 return (
@@ -50,14 +48,22 @@ return (
             <button
              type="Button"
              data-employee={employee}
-             onClick={() =>{editEmployee.current = employee; showEmployeeEditForm()}}
+             onClick={() => {
+              editEmployee.current = employee;
+              showEmployeeEditForm()
+            }}
             >
               <FaUserEdit />Editar
             </button>
             <button
              type="Button"
              data-employeeid={employee.id}
-             onClick={deleteEmployee}
+             onClick={({target: {dataset: {employeeid}}}) => {
+              setEmployeeIdToExclude(+employeeid);
+              showDeleteAlert()
+              editEmployee.current = employee;
+            }
+            }
             >
               <MdCancel /> Excluir
             </button>

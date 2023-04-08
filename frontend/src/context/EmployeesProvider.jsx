@@ -7,9 +7,8 @@ export default function EmployeeProvider({ children }) {
   const [employees, setEmployees] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [filterDepartment, setFilterDepartment] = useState(0);
-  
   const [employeesTable, setEmployeesTable] = useState([]);
-  
+  const [employeeIdToExclude, setEmployeeIdToExclude] = useState(0);  
 
   const editEmployee = useRef({})
 
@@ -45,7 +44,8 @@ export default function EmployeeProvider({ children }) {
     filterDepartment,
     setFilterDepartment,
     editEmployee,
-    employeesTable, setEmployeesTable
+    employeesTable, setEmployeesTable,
+    employeeIdToExclude, setEmployeeIdToExclude
   }), [
     employees,
     setEmployees,
@@ -53,7 +53,8 @@ export default function EmployeeProvider({ children }) {
     filterDepartment,
     setFilterDepartment,
     editEmployee,
-    employeesTable, setEmployeesTable 
+    employeesTable, setEmployeesTable,
+    employeeIdToExclude, setEmployeeIdToExclude 
   ]);
 
   return (
