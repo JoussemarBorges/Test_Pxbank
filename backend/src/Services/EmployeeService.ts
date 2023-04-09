@@ -7,15 +7,24 @@ import IEmployee from "../Interfaces/IEmployee";
 
 class EmployeeService {
 
-  static async registerEmployee(newEmployeeData: IEmployee): Promise<IEmployee | null | IBadRequestError> {
+  static async getEmployeeByCpf(cpf: string) {
+    const cpfAlreadExists = await Employee.findOne({where: {cpf: cpf}})
+
+    console.log(cpfAlreadExists?.dataValues);
+    
+    
+    return cpfAlreadExists?.dataValues
+  }
+
+  static async registerEmployee(newEmployeeData: IEmployee): Promise<IEmployee | IBadRequestError | null > {
 
     const {departmentId, cpf} = newEmployeeData;
 
     const isDepatmentExists = await Department.findByPk(departmentId);
     if(!isDepatmentExists) return {message: 'O departamento é inválido'};
 
-    const cpfAlreadExists = await Department.findOne({where: {cpf: cpf}})
-    if(cpfAlreadExists) return {message: 'CPF já cadastrado.'}
+    const cpfAlreadExists = await Employee.findOne({where: {cpf: cpf}})
+    if(cpfAlreadExists?.dataValues.cpf) return {message: 'CPF já cadastrado.'}
 
     const {dataValues} = await Employee.create({...newEmployeeData});
     const employeeRegistered = dataValues;

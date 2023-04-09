@@ -1,15 +1,25 @@
 import { NextFunction, Request, Response } from "express";
+import IBadRequestError from "../Interfaces/IErrors";
 import EmployeeService from "../Services/EmployeeService";
 
 class EmployeeController {
+  
+  static async getEmployeeByCpf(req: Request, res: Response, _next: NextFunction) {
+    const {cpf} = req.body
+
+    const checkCpfAlreadyExists = EmployeeService.getEmployeeByCpf(cpf)
+
+    return res.status(200).json(checkCpfAlreadyExists)
+  }
 
   static async registerEmployee(req: Request, res: Response, next: NextFunction) {
     const newEmployeeData = req.body;
     
     try {
-      const employeeWasregistered = await EmployeeService.registerEmployee(newEmployeeData);
-  
-      if(employeeWasregistered) return res.status(400).json({message: 'O id do departamento não é válido'});
+      const employeeWasregistered = await EmployeeService.registerEmployee(newEmployeeData) as IBadRequestError;
+
+      if(employeeWasregistered?.message) return res.status(409).json(employeeWasregistered);
+
       return res.status(201).json(employeeWasregistered);
       
     } catch (error) {

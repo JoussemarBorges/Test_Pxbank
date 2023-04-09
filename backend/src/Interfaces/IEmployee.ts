@@ -8,7 +8,7 @@ interface IEmployee {
   department?: {
     departmentId: number,
     departmentName: string,
-  }
+  },
 }
 
 export default IEmployee;
