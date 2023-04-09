@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../context/Context";
 import Masks from "../Utils/Masks";
 import axiosApi from "../Utils/utils";
@@ -15,7 +15,7 @@ function RegisterForm ({setToggleVisibRegister}) {
   const [department, setDepartment] = useState(1);
   const [wage, setWage] = useState('');
   const [birthDate, setBirthDate] = useState("");
-  const [isDisabled, setIsDisabled] = useState(true)
+  // const [isDisabled, setIsDisabled] = useState(true)
 
   const abortEmployeeRegister= () => {
     setToggleVisibRegister(false)
@@ -35,19 +35,19 @@ function RegisterForm ({setToggleVisibRegister}) {
         
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if(
-      name.length > 2
-      && cpf.length === 14
-      && wage.length > 7
-      && birthDate !== ""
-    ) {
-      setIsDisabled(false)
-    }
-    setIsDisabled(false)
+  //   if(
+  //     name.length > 3
+  //     && cpf.length === 14
+  //     && wage.length > 7
+  //     // && birthDate !== ""
+  //   ) {
+  //     setIsDisabled(false)
+  //   }
+  //   setIsDisabled(true)
 
-  }, [cpf, wage, birthDate, name])
+  // }, [cpf, wage, birthDate, name])
   
   return (
   <div className={style.modal}>
@@ -102,7 +102,7 @@ function RegisterForm ({setToggleVisibRegister}) {
       <button
         type="Button"
         onClick={registerNewEmployee}
-        disabled={isDisabled}
+        disabled={false}
       >
         <MdAssignmentAdd style={{marginRight: "10px"}} /> Cadastrar
       </button>
