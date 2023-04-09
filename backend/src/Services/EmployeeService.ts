@@ -1,18 +1,21 @@
 // import { ModelStatic } from "sequelize";
-import { AffectedFileResult } from "typescript";
 import Department from "../database/models/department";
 import Employee from "../database/models/employee";
+import IBadRequestError from "../Interfaces/IErrors";
 
 import IEmployee from "../Interfaces/IEmployee";
 
 class EmployeeService {
 
-  static async registerEmployee(newEmployeeData: IEmployee): Promise<IEmployee | null> {
+  static async registerEmployee(newEmployeeData: IEmployee): Promise<IEmployee | null | IBadRequestError> {
 
-    const {departmentId} = newEmployeeData;
+    const {departmentId, cpf} = newEmployeeData;
+
     const isDepatmentExists = await Department.findByPk(departmentId);
+    if(!isDepatmentExists) return {message: 'O departamento é inválido'};
 
-    if(!isDepatmentExists) return isDepatmentExists;
+    const cpfAlreadExists = await Department.findOne({where: {cpf: cpf}})
+    if(cpfAlreadExists) return {message: 'CPF já cadastrado.'}
 
     const {dataValues} = await Employee.create({...newEmployeeData});
     const employeeRegistered = dataValues;
@@ -29,7 +32,7 @@ class EmployeeService {
     return allEmployees;
   }
 
-  static async updateEmployee(employeeData: IEmployee): Promise<number | object>{
+  static async updateEmployee(employeeData: IEmployee): Promise<number | IBadRequestError>{
     const {id, departmentId} = employeeData;
 
 

@@ -9,7 +9,7 @@ class EmployeeController {
     try {
       const employeeWasregistered = await EmployeeService.registerEmployee(newEmployeeData);
   
-      if(!employeeWasregistered) return res.status(400).json({message: 'O id do departamento não é válido'});
+      if(employeeWasregistered) return res.status(400).json({message: 'O id do departamento não é válido'});
       return res.status(201).json(employeeWasregistered);
       
     } catch (error) {

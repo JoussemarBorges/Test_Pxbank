@@ -5,6 +5,10 @@ interface IEmployee {
   wage: number,
   dateOfBirth: Date,
   departmentId?: number,
+  department?: {
+    departmentId: number,
+    departmentName: string,
+  }
 }
 
 export default IEmployee;
