@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context/Context";
 import Masks from "../Utils/Masks";
 import axiosApi from "../Utils/utils";
@@ -14,7 +14,8 @@ function RegisterForm ({setToggleVisibRegister}) {
   const [cpf, setCpf] = useState('');
   const [department, setDepartment] = useState(1);
   const [wage, setWage] = useState('');
-  const [birthDate, setBirthDate] = useState(Date);
+  const [birthDate, setBirthDate] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true)
 
   const abortEmployeeRegister= () => {
     setToggleVisibRegister(false)
@@ -31,9 +32,22 @@ function RegisterForm ({setToggleVisibRegister}) {
     await axiosApi.post('/employees', bodyRequest)
 
     window.location.reload();
-
         
   }
+
+  useEffect(() => {
+
+    if(
+      name.length > 2
+      && cpf.length === 14
+      && wage.length > 7
+      && birthDate !== ""
+    ) {
+      setIsDisabled(false)
+    }
+    setIsDisabled(false)
+
+  }, [cpf, wage, birthDate, name])
   
   return (
   <div className={style.modal}>
@@ -80,9 +94,16 @@ function RegisterForm ({setToggleVisibRegister}) {
       </label>
       <label>
         Data de Nascimento:
-        <input type="date" onChange={({target: {value}}) => setBirthDate(value)} />
+        <input
+          type="date"
+          onChange={({target: {value}}) => setBirthDate(value)}
+        />
       </label>
-      <button type="Button" onClick={registerNewEmployee}>
+      <button
+        type="Button"
+        onClick={registerNewEmployee}
+        disabled={isDisabled}
+      >
         <MdAssignmentAdd style={{marginRight: "10px"}} /> Cadastrar
       </button>
       <button

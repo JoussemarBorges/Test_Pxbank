@@ -8,9 +8,21 @@
   background-color: #fff;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
 
 }
 
 .searchForm input, select {
   margin: 5px 10px;
 }
+
+.searchForm h3 {
+  padding: 15px 10px;
+  text-align: center;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+

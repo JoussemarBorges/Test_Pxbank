@@ -39,11 +39,12 @@ function SearchForm() {
   }, [employeeName, departmentId])
   
   return (
-      <form className={style.searchForm}>
+    <form className={style.searchForm}>
+        <h3>Pesquisar</h3>
         <label>
-            Nome:
+            Funcionário:
           <input 
-            placeholder="Funcionário"
+            placeholder="Nome"
             name="Nome"
             type="text"
             onChange={({target:{value}}) => setEmployeeName(value)}
