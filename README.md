@@ -26,11 +26,11 @@ Teste técnico realizado para o processo seletivo da pxbank. O desafio era criar
 
     - Para criar o container com a imagem do MySQL via Docker, utilize o comando abaixo:
         * docker container create --name <nome_do_container> -it -e MYSQL_ROOT_PASSWORD=<senha_de_acesso> -p 3003:3306 mysql:5.7
-            -> -it para rodar no modo interativo;
-            -> --name para definir o nome do container;
-            -> -e para definir a variável de ambiente e atribuir uma senha de acesso ao db pelo terminal interativo ou cm o workbench, por exemplo.
-            -> -p para definir a porta. A porta padrão é 3306 mas é possivel redefinir conforme no exemplo acima
-            -> no fim, já foi definido a imagem e a versão, caso não tenha a imagem instalada o pr
+            * -it para rodar no modo interativo;
+            * --name para definir o nome do container;
+            * -e para definir a variável de ambiente e atribuir uma senha de acesso ao db pelo terminal interativo ou cm o workbench, por exemplo.
+            * -p para definir a porta. A porta padrão é 3306 mas é possivel redefinir conforme no exemplo acima
+            * no fim, já foi definido a imagem e a versão, caso não tenha a imagem instalada o pr
 
 6. Configuração default das portas:
     - MySQL: porta 3003:
