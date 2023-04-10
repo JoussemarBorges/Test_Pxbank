@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context/Context";
 import Masks from "../Utils/Masks";
 import axiosApi from "../Utils/utils";
@@ -16,7 +16,7 @@ function RegisterForm ({setToggleVisibRegister}) {
   const [wage, setWage] = useState('');
   const [birthDate, setBirthDate] = useState("");
   const [error, setError] = useState(null);
-  // const [isDisabled, setIsDisabled] = useState(true)
+  const [enabled, setEnabled] = useState(true);
 
   const abortEmployeeRegister= () => {
     setToggleVisibRegister(false)
@@ -48,6 +48,17 @@ function RegisterForm ({setToggleVisibRegister}) {
       }
     }
   }
+
+  useEffect(() => {
+
+    const isEnabled = name.length > 2
+    && cpf.length === 14
+    && wage.length > 7
+    && birthDate !== ""
+    
+    setEnabled(!isEnabled)
+
+  }, [cpf, wage, birthDate, name])
 
   
   return (
@@ -106,7 +117,7 @@ function RegisterForm ({setToggleVisibRegister}) {
       <button
         type="Button"
         onClick={registerNewEmployee}
-        disabled={false}
+        disabled={enabled}
       >
         <MdAssignmentAdd style={{marginRight: "10px"}} /> Cadastrar
       </button>
@@ -116,6 +127,15 @@ function RegisterForm ({setToggleVisibRegister}) {
       >
         <MdCancel style={{marginRight: "10px"}}/> Cancelar
       </button>
+      {
+        enabled &&
+      <div style={{padding: '10px 0'}}>
+        <h6 style={{color: 'red'}}>
+          * Para autorizar o cadastro, todos os campos devem ser preenchidos!
+        </h6>
+      </div>
+      }
+
     </form>
   </div>
   )
