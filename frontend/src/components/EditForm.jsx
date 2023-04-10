@@ -1,42 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../context/Context";
 import axiosApi from '../Utils/utils'
 import Masks from "../Utils/Masks";
 import style from "../style/registerForm.module.css"
 import { MdAssignmentAdd, MdCancel } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa"
+import {getDate} from "../Utils/dateMask";
+import priceToString from "../Utils/priceToString";
 
 
 function EditForm ({setToggleVisibEdit}) {
   const {departments, editEmployee} = useContext(AppContext);
+  const [error, setError] = useState(null);
   
   const abortEmployeeEdit = () => {
     setToggleVisibEdit(false)
   }
 
-  const getDate = (date) => {
-  const currentDate = new Date(date)
-  let month = +currentDate.getUTCMonth()+1
-  month = month < 10 ? '0'+month : month;
-  return currentDate.getUTCFullYear()+'-'+month+'-'+currentDate.getUTCDate()  
-  }
-
+ 
   const updateEmployee = async () => {
-    const {department: _, ...bodyRequest} = editEmployee.current
-
-    const wage = editEmployee.current.wage.replace('.', '').replace(',', '.')
-
-    bodyRequest.wage = wage;
+    const bodyRequest = {
+      id: editEmployee.current.id,
+      employeeName: editEmployee.current.employeeName,
+      cpf: editEmployee.current.cpf,
+      wage: Number(editEmployee.current.wage.replace(',', '').replace(',', '.')),
+      dateOfBirth: getDate(editEmployee.current.dateOfBirth),
+      departmentId: editEmployee.current.departmentId
+    }
 
     try {
       await axiosApi.put('/employees', bodyRequest);      
+      setError(null)
+      window.location.reload();
     } catch (error) {
-      console.log(error.message)
+      
+      const {response: {data: {message}, status}} = error
+
+      if(status === 500) {
+        const customMessage = 'Houve um erro com sua requisição, tente novamente mais tarde!'
+        setError(customMessage)
+      } else {
+        setError(message)
+      }
     }
-
-
-    window.location.reload();
-
   }
   
   return (
@@ -45,7 +51,10 @@ function EditForm ({setToggleVisibEdit}) {
       <h2>
         <FaUserEdit style={{fontSize: "40px", marginRight: "10px"}}/>
         Atualizar Funcionário
-      </h2> 
+      </h2>
+      <div>
+        {error && error}  
+      </div> 
       <label>
         Nome:
         <input 
@@ -88,12 +97,13 @@ function EditForm ({setToggleVisibEdit}) {
         <input
          type="text"
          name="wage"
-         defaultValue={editEmployee.current.wage}
+         defaultValue={priceToString(editEmployee.current.wage)}
          onChange={({target}) => {
           const {name, value} = target;
           editEmployee.current.wage = Masks[name](value);
-          target.value = editEmployee.current.wage = Masks[name](value);
-        }} 
+          target.value = editEmployee.current.wage = Masks[name](value)
+          }
+      } 
         />
       </label>
       <label>

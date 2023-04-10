@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import AppContext from "../context/Context";
-import changeDate from "../Utils/dateMask";
+import {changeDate} from "../Utils/dateMask";
 import style from '../style/tableForm.module.css'
 import {MdCancel} from 'react-icons/md'
 import {FaUserEdit} from 'react-icons/fa'
+// import getDate from "../Utils/dateMask";
 
 
 function EmployeeTable ({setToggleVisibEdit, setToggleVisibRegister, setToggleVisibAlert}) {

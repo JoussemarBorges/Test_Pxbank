@@ -15,6 +15,7 @@ function RegisterForm ({setToggleVisibRegister}) {
   const [department, setDepartment] = useState(1);
   const [wage, setWage] = useState('');
   const [birthDate, setBirthDate] = useState("");
+  const [error, setError] = useState(null);
   // const [isDisabled, setIsDisabled] = useState(true)
 
   const abortEmployeeRegister= () => {
@@ -29,25 +30,25 @@ function RegisterForm ({setToggleVisibRegister}) {
       dateOfBirth: birthDate,
       departmentId: department
     }
-    await axiosApi.post('/employees', bodyRequest)
 
-    window.location.reload();
-        
+    try {
+      await axiosApi.post('/employees', bodyRequest)
+      setError(null)
+      window.location.reload();
+      
+    } catch (error) {
+      
+      const {response: {data: {message}, status}} = error
+
+      if(status === 500) {
+        const customMessage = 'Houve um erro com sua requisição, tente novamente mais tarde!'
+        setError(customMessage)
+      } else {
+        setError(message)
+      }
+    }
   }
 
-  // useEffect(() => {
-
-  //   if(
-  //     name.length > 3
-  //     && cpf.length === 14
-  //     && wage.length > 7
-  //     // && birthDate !== ""
-  //   ) {
-  //     setIsDisabled(false)
-  //   }
-  //   setIsDisabled(true)
-
-  // }, [cpf, wage, birthDate, name])
   
   return (
   <div className={style.modal}>
@@ -57,6 +58,9 @@ function RegisterForm ({setToggleVisibRegister}) {
         Novo Funcionário
       
       </h2> 
+      <div>
+        {error && error}
+      </div>
       <label>
         Nome:
         <input onChange={({target: {value}}) => setName(value)} type="text" />
