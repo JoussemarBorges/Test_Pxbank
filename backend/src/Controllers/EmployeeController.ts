@@ -4,14 +4,6 @@ import EmployeeService from "../Services/EmployeeService";
 
 class EmployeeController {
   
-  static async getEmployeeByCpf(req: Request, res: Response, _next: NextFunction) {
-    const {cpf} = req.body
-
-    const checkCpfAlreadyExists = EmployeeService.getEmployeeByCpf(cpf)
-
-    return res.status(200).json(checkCpfAlreadyExists)
-  }
-
   static async registerEmployee(req: Request, res: Response, next: NextFunction) {
     const newEmployeeData = req.body;
     
@@ -46,7 +38,8 @@ class EmployeeController {
       const employeeData = req.body;
       const isEmployeeUpdated = await EmployeeService.updateEmployee(employeeData);
   
-      if(isEmployeeUpdated !== 1) return res.status(200).json(isEmployeeUpdated);
+      if(isEmployeeUpdated !== 1) return res.status(409).json(isEmployeeUpdated);
+      
       return res.status(200).json({message: 'Dados atualizados com sucesso!' });
       
     } catch (error) {
