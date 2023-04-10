@@ -58,8 +58,11 @@ Teste técnico realizado para o processo seletivo da pxbank. O desafio era criar
         * Caso não rode, verifique se o MySQL está rodando na porta 3003
 
     - Entre no diretório /frontend e rode o comando npm start pelo terminl.
+    
+8 - Rode o comando npm run reset no diretório /backend:
+    * Esse comando irá faer a transpilação do TypeScript para o Java Script, criar o DB, criar as tabelas e inserir alguns registros com o Sequelize.
 
-8. Pronto! A partir de agora já é possível utilizar a página de funcionários!
+9 - Pronto! A partir de agora já é possível utilizar a página de funcionários!
     
 </details>
 
